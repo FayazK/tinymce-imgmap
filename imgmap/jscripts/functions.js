@@ -335,7 +335,7 @@ function gui_addArea(id) {
 	temp+= '<option value="poly"   >polygon</option>';
 	temp+= '</select>';
 	temp+= 'Coords: <input type="text" name="img_coords" class="img_coords" value="">';
-	temp+= 'Href: <input type="text" name="img_href" class="img_href" value="">';
+	temp+= 'Href: <input type="text" name="img_href" class="img_href txt_href_'+id+'" value=""><button type="button" onclick="openurl('+id+')">...</button>';
 	temp+= 'Alt: <input type="text" name="img_alt" class="img_alt" value="">';
 	temp+= 'Target: <select name="img_target" class="img_target">';
 	temp+= '<option value=""  >&lt;not set&gt;</option>';
@@ -362,6 +362,17 @@ function gui_addArea(id) {
 	if (myimgmap.nextShape) {props[id].getElementsByTagName('select')[0].value = myimgmap.nextShape;}
 	//alert(this.props[id].parentNode.innerHTML);
 	gui_row_select(id, true);
+}
+
+function openurl(el){
+	var x = prompt("Enter some thing");
+    var e = document.createEvent('HTMLEvents');
+    e.initEvent('change', false, true);
+
+	el = document.querySelector(".txt_href_"+el);
+	el.value = x;
+	el.setAttribute("value",x);
+	el.dispatchEvent(e);
 }
 
 /**
@@ -540,5 +551,3 @@ function gui_zoom() {
 	pic.height = pic.oldheight * scale;
 	myimgmap.scaleAllAreas(scale);
 }
-
-
